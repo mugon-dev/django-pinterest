@@ -13,7 +13,7 @@ from accountapp.models import HelloWorld
 def hello_world(request):
     if request.method == "POST":
 
-        temp = request.POST.get('hello_world_input')
+        temp = request.POST.get("hello_world_input")
 
         new_hello_world = HelloWorld()
         new_hello_world.text = temp
@@ -21,10 +21,14 @@ def hello_world(request):
 
         hello_world_list = HelloWorld.objects.all()
 
-        return HttpResponseRedirect(reverse('accountapp:hello_world'))
+        return HttpResponseRedirect(reverse("accountapp:hello_world"))
     else:
         hello_world_list = HelloWorld.objects.all()
-        return render(request, 'accountapp/hello_world.html', context={'hello_world_list': hello_world_list})
+        return render(
+            request,
+            "accountapp/hello_world.html",
+            context={"hello_world_list": hello_world_list},
+        )
 
 
 class AccountCreateView(CreateView):
@@ -33,6 +37,6 @@ class AccountCreateView(CreateView):
     # 장고에서 제공하는 템플릿
     form_class = UserCreationForm
     # 계정 생성 성공시 이동하는 url
-    success_url = reverse_lazy('accountapp:hello_world')
+    success_url = reverse_lazy("accountapp:hello_world")
     # 회원가입을 할때 어떤 html 파일을 볼지
-    template_name = 'accountapp/create.html'
+    template_name = "accountapp/create.html"
