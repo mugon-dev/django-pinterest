@@ -5,8 +5,9 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse, reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView, UpdateView
 
+from accountapp.forms import AccountUpdateForm
 from accountapp.models import HelloWorld
 
 
@@ -40,3 +41,16 @@ class AccountCreateView(CreateView):
     success_url = reverse_lazy("accountapp:hello_world")
     # 회원가입을 할때 어떤 html 파일을 볼지
     template_name = "accountapp/create.html"
+
+
+class AccountDetailView(DetailView):
+    model = User
+    context_object_name = "target_user"
+    template_name = "accountapp/detail.html"
+
+
+class AccountUpdateView(UpdateView):
+    model = User
+    form_class = AccountUpdateForm
+    success_url = reverse_lazy("accountapp:hello_world")
+    template_name = "accountapp/update.html"
