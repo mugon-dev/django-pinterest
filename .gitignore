@@ -77,3 +77,5 @@ venv/
 .idea/
 .env
 __pycache__/
+/db_backup.sqlite3
+media/
